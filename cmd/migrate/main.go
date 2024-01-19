@@ -43,7 +43,7 @@ func main() {
 	}
 
 	m, err := migrate.NewWithDatabaseInstance(
-		"file://../../migrations",
+		"file://migrations",
 		"postgres",
 		driver,
 	)
@@ -55,5 +55,7 @@ func main() {
 	if err := m.Up(); err != nil {
 		log.Fatalln("Unable to run migration:", err)
 	}
+
+	log.Println("Migration completed successfully.")
 
 }
