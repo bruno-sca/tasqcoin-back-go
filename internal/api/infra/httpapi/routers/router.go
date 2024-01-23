@@ -11,6 +11,7 @@ type Router interface {
 }
 
 func MakeRouter(
+	usersRouter *UsersRouter,
 	config *config.Config,
 ) *fiber.App {
 	cfg := fiber.Config{
@@ -21,6 +22,8 @@ func MakeRouter(
 	}
 
 	r := fiber.New(cfg)
+
+	usersRouter.Load(r)
 
 	return r
 }

@@ -7,7 +7,7 @@ import (
 )
 
 type UsersController struct {
-	service users.IUserService
+	service *users.UserService
 }
 
 type CreateUserRequest struct {
@@ -38,7 +38,7 @@ func (uc *UsersController) Create(c *fiber.Ctx) error {
 		JSON(fiber.Map{"message": "user created"})
 }
 
-func NewUsersController(service users.IUserService) *UsersController {
+func NewUsersController(service *users.UserService) *UsersController {
 	return &UsersController{
 		service: service,
 	}
