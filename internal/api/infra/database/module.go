@@ -1,7 +1,11 @@
 package database
 
-import "go.uber.org/fx"
+import (
+	"github.com/bruno-sca/tasqcoin-back-go/internal/api/infra/database/usersdb"
+	"go.uber.org/fx"
+)
 
-var Module = fx.Provide(
-	NewPostgresDatabase,
+var Module = fx.Options(
+	fx.Provide(NewPostgresDatabase),
+	usersdb.Module,
 )
