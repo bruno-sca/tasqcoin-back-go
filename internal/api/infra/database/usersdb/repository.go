@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/bruno-sca/tasqcoin-back-go/internal/api/domain/users/model"
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
@@ -26,6 +27,10 @@ func (r *UsersSQLRepository) FindByEmail(email string) (*model.User, error) {
 		Scan(&user.ID, &user.Name, &user.Email, &user.Password)
 
 	if err != nil {
+		if err == pgx.ErrNoRows {
+			return nil, nil
+		}
+
 		return nil, err
 	}
 
